@@ -18,13 +18,13 @@ public class GameState {
     private Hashtable<String, Integer> playerHand = new Hashtable<String, Integer>(); //cards player has in their hand
 
     public GameState(){
-        playerTurn = 0; //player 0 will go first
-        bidNum = 0;
-        cardPlayed = -1;    //player has no played card yet
-        playerScore = 0;
-        gameStage = 0;      //starts at game state 0: bidding phase
-        trumpCard = -1;     //trump card is not decided yet?
-        roundNum = 1;
+        this.playerTurn = 0; //player 0 will go first
+        this.bidNum = 0;
+        this.cardPlayed = -1;    //player has no played card yet
+        this.playerScore = 0;
+        this.gameStage = 0;      //starts at game state 0: bidding phase
+        this.trumpCard = -1;     //trump card is not decided yet?
+        this.roundNum = 1;
         deck.put("heart zero", 0);    //joker
         deck.put("heart two", 2);
         deck.put("heart three", 3);
@@ -99,6 +99,32 @@ public class GameState {
         deck.get(value);
         playerHand.put(value, myValue);
         deck.remove(value, myValue);
+    }
+
+    //copy constructor
+    GameState(GameState myState){
+        playerTurn = myState.playerTurn;
+        bidNum = myState.bidNum;
+        cardPlayed = myState.cardPlayed;
+        playerScore = myState.playerScore;
+        gameStage = myState.gameStage;
+        trumpCard = myState.trumpCard;
+        roundNum = myState.roundNum;
+
+        //is this a deep copy?
+        Hashtable<String, Integer> deck = new Hashtable<String, Integer>();
+        deck = myState.deck;
+        Hashtable<String, Integer> playerHand = new Hashtable<String, Integer>();
+        playerHand = myState.playerHand;
+    }
+
+    @Override
+    public String toString(){
+        return "Player turn: " + this.playerTurn + "\n Bid: " + this.bidNum +
+        "\n Card Played: " + this.cardPlayed + "\n Player Score: " + this.playerScore +
+        "\n Game Stage: " + this.gameStage + "\n Trump Card: " + this.trumpCard +
+        "\n Round Number: " + this.roundNum + "\n Current Deck: " + this.deck +
+                "\n Player's Hand: " + this.playerHand;
     }
 
 }
