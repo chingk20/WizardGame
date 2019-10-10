@@ -24,10 +24,6 @@ public class GameState {
         return playerTurn;
     }
 
-    public int getBidNum() {
-        return bidNum;
-    }
-
     public int getCardPlayed() {
         return cardPlayed;
     }
@@ -52,10 +48,6 @@ public class GameState {
         this.playerTurn = playerTurn;
     }
 
-    public void setBidNum(int bidNum) {
-        this.bidNum = bidNum;
-    }
-
     public void setCardPlayed(int cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
@@ -78,7 +70,6 @@ public class GameState {
 
     public GameState(){
         this.playerTurn = 0; //player 0 will go first
-        this.bidNum = 0;
         this.cardPlayed = -1;    //player has no played card yet
         this.playerScore = 0;
         this.gameStage = 0;      //starts at game state 0: bidding phase
@@ -183,10 +174,12 @@ public class GameState {
                                 "nine", "ten", "eleven",
                                 "twelve", "thirteen", "fourteen", "fifteen"};
         for (int round = 0; round < numTricks; round++) {
-            int randomSuit = random.nextInt(cardSuit.length);
-            int randomVal = random.nextInt(cardValue.length);
-            playerHand.put(cardSuit[randomSuit], cardValue[randomVal]);
-            deck.remove(cardSuit[randomSuit]);
+            //int randomSuit = random.nextInt(cardSuit.length);
+            //int randomVal = random.nextInt(cardValue.length);
+            //playerHand.put(cardSuit[randomSuuit], cardValue[randomVal]);
+            //deck.remove(cardSuit[randomSuit]);
+            playerHand.put("diamond five", 5);
+            deck.remove("diamond five");
         }
     }
 
@@ -215,9 +208,9 @@ public class GameState {
     }
 
 
-    public boolean placeBid(int player, int bid)
+    public boolean placeBid(int playerNum, int bid, String player)
     {
-        if (player != playerTurn || bid < 0 || bid > roundNum)
+        if (playerNum != playerTurn || bid < 0 || bid > roundNum)
         {
             return false;
         }
@@ -234,9 +227,10 @@ public class GameState {
 
     public boolean playCard(int player, String card)
     {
-        if (player == playerTurn && playerHand.containsKey(card))
+        Hashtable<String, Integer>  currentHand = playerArray.get(player);
+        if (player == playerTurn && currentHand.containsKey(card))
         {
-            playerHand.remove(card);
+            playerArray.set(player, currentHand);
             cardsPlayed.add(card);
             playerTurn++;
             return true;
