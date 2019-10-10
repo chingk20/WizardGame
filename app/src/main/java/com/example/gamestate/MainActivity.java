@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GameState thirdInstance = new GameState();
             GameState fourthInstance = new GameState(thirdInstance);
             fourthInstance.setPlayerTurn(1);
-            editText.append(secondInstance.toString());
-            editText.append("\n"+fourthInstance.toString());
+            editText.append(firstInstance.toString());
+            editText.append("\n\n"+fourthInstance.toString());
         }
     }
 }
