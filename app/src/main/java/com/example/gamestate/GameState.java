@@ -8,14 +8,13 @@ import java.util.Random;
 
 public class GameState {
     private int playerTurn; //which players turn it is
-    private int bidNum; //amount player chooses to bid
     private int cardPlayed; //card number player chooses to play for round
     private int playerScore;    //players total score
     private int gameStage;  //which state of the game the player is in
     private int trumpCard;  //value of trump card
     private int roundNum;
     private int numberPlayers = 3;
-    private Hashtable<String, Integer>  bidNum = new Hashtable<~>();
+    private Hashtable<String, Integer>  bidNum = new Hashtable<String, Integer>();
     private Hashtable<String, Integer> deck = new Hashtable<String, Integer>();   //all the cards in the deck
     private List<Hashtable<String, Integer>> playerArray = new ArrayList<Hashtable<String, Integer>>();
     private ArrayList<String> cardsPlayed = new ArrayList<>();
