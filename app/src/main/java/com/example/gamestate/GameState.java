@@ -8,14 +8,16 @@ import java.util.Random;
 
 public class GameState {
     private int playerTurn; //which players turn it is
-    private int bidNum; //amount player chooses to bid
     private int cardPlayed; //card number player chooses to play for round
     private int playerScore;    //players total score
     private int gameStage;  //which state of the game the player is in
     private int trumpCard;  //value of trump card
     private int roundNum;
+    private int numberPlayers = 3;
+    private Hashtable<String, Integer>  bidNum = new Hashtable<~>();
     private Hashtable<String, Integer> deck = new Hashtable<String, Integer>();   //all the cards in the deck
     private Hashtable<String, Integer> playerHand = new Hashtable<String, Integer>(); //cards player has in their hand
+    private ArrayList<String> cardsPlayed = new ArrayList<>();
 
 
     public int getPlayerTurn() {
@@ -183,5 +185,39 @@ public class GameState {
         "\n Round Number: " + this.roundNum + "\n Current Deck: " + this.deck +
                 "\n Player's Hand: " + this.playerHand;
     }
+
+
+    public boolean placeBid(int player, int bid)
+    {
+        if (player != playerTurn || bid < 0 || bid > roundNum)
+        {
+            return false;
+        }
+        else
+        {
+            if(bidNum.containsKey(player))
+            {
+                bidNum.replace(player, 0, bid);
+            }
+            playerTurn++;
+            return true;
+        }
+    }
+
+    public boolean playCard(int player, String card)
+    {
+        if (player == playerTurn && playerHand.containsKey(card))
+        {
+            playerHand.remove(card);
+            cardsPlayed.add(card);
+            playerTurn++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }
