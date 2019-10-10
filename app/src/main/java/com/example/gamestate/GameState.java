@@ -17,6 +17,63 @@ public class GameState {
     private Hashtable<String, Integer> deck = new Hashtable<String, Integer>();   //all the cards in the deck
     private Hashtable<String, Integer> playerHand = new Hashtable<String, Integer>(); //cards player has in their hand
 
+
+    public int getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public int getBidNum() {
+        return bidNum;
+    }
+
+    public int getCardPlayed() {
+        return cardPlayed;
+    }
+
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public int getGameStage() {
+        return gameStage;
+    }
+
+    public int getTrumpCard() {
+        return trumpCard;
+    }
+
+    public int getRoundNum() {
+        return roundNum;
+    }
+
+    public void setPlayerTurn(int playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+    public void setBidNum(int bidNum) {
+        this.bidNum = bidNum;
+    }
+
+    public void setCardPlayed(int cardPlayed) {
+        this.cardPlayed = cardPlayed;
+    }
+
+    public void setPlayerScore(int playerScore) {
+        this.playerScore = playerScore;
+    }
+
+    public void setGameStage(int gameStage) {
+        this.gameStage = gameStage;
+    }
+
+    public void setTrumpCard(int trumpCard) {
+        this.trumpCard = trumpCard;
+    }
+
+    public void setRoundNum(int roundNum) {
+        this.roundNum = roundNum;
+    }
+
     public GameState(){
         this.playerTurn = 0; //player 0 will go first
         this.bidNum = 0;
@@ -86,11 +143,11 @@ public class GameState {
         deck.put("club fourteen", 14);   //ace
         deck.put("club fifteen", 15);  //wizard
 
-        dealDeck(deck, playerHand); //gives player a random card to start
+        //dealDeck(deck, playerHand); //gives player a random card to start
     }
 
     //deals a card out to a player
-    public void dealDeck(Hashtable deck, Hashtable playerHand){
+    /*public void dealDeck(Hashtable deck, Hashtable playerHand){
         Random random = new Random();
         List<String> shuffleDeck = new ArrayList<String>(deck.keySet());
         String randomKey = shuffleDeck.get(random.nextInt(shuffleDeck.size()));
@@ -98,11 +155,11 @@ public class GameState {
         Integer myValue = (Integer) deck.get(randomKey);
         deck.get(value);
         playerHand.put(value, myValue);
-        deck.remove(value, myValue);
-    }
+        deck.remove(value);
+    }*/
 
     //copy constructor
-    GameState(GameState myState){
+    public GameState(GameState myState){
         playerTurn = myState.playerTurn;
         bidNum = myState.bidNum;
         cardPlayed = myState.cardPlayed;
