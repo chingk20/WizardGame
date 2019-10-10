@@ -8,17 +8,25 @@ import java.util.Random;
 
 public class GameState {
     private int playerTurn; //which players turn it is
+    private int bidNum; //amount player chooses to bid
     private int cardPlayed; //card number player chooses to play for round
     private int playerScore;    //players total score
     private int gameStage;  //which state of the game the player is in
     private int trumpCard;  //value of trump card
-    private int roundNum; //Keeps track of the round/the number of tricks
+    private int roundNum;
+    private int numberPlayers = 3;
+    private Hashtable<String, Integer>  bidNum = new Hashtable<~>();
     private Hashtable<String, Integer> deck = new Hashtable<String, Integer>();   //all the cards in the deck
-    private Hashtable<String, Integer> playerHand = new Hashtable<String, Integer>(); //cards player has in their hand
     private List<Hashtable<String, Integer>> playerArray = new ArrayList<Hashtable<String, Integer>>();
+    private ArrayList<String> cardsPlayed = new ArrayList<>();
+
 
     public int getPlayerTurn() {
         return playerTurn;
+    }
+
+    public int getBidNum() {
+        return bidNum;
     }
 
     public int getCardPlayed() {
@@ -45,6 +53,10 @@ public class GameState {
         this.playerTurn = playerTurn;
     }
 
+    public void setBidNum(int bidNum) {
+        this.bidNum = bidNum;
+    }
+
     public void setCardPlayed(int cardPlayed) {
         this.cardPlayed = cardPlayed;
     }
@@ -67,6 +79,7 @@ public class GameState {
 
     public GameState(){
         this.playerTurn = 0; //player 0 will go first
+        this.bidNum = 0;
         this.cardPlayed = -1;    //player has no played card yet
         this.playerScore = 0;
         this.gameStage = 0;      //starts at game state 0: bidding phase
@@ -181,6 +194,7 @@ public class GameState {
     //copy constructor
     public GameState(GameState myState){
         playerTurn = myState.playerTurn;
+        bidNum = myState.bidNum;
         cardPlayed = myState.cardPlayed;
         playerScore = myState.playerScore;
         gameStage = myState.gameStage;
@@ -188,9 +202,7 @@ public class GameState {
         roundNum = myState.roundNum;
 
         //is this a deep copy?
-        //Hashtable<String, Integer> deck = new Hashtable<String, Integer>();
         deck = myState.deck;
-        //List<Hashtable<String, Integer>> playerArray = new ArrayList<Hashtable<String, Integer>>();
         playerArray = myState.playerArray;
     }
 
@@ -202,5 +214,39 @@ public class GameState {
         "\n Round Number: " + this.roundNum + "\n Current Deck: " + this.deck +
                 "\n Player's Hand: " + this.playerArray;
     }
+
+
+    public boolean placeBid(int player, int bid)
+    {
+        if (player != playerTurn || bid < 0 || bid > roundNum)
+        {
+            return false;
+        }
+        else
+        {
+            if(bidNum.containsKey(player))
+            {
+                bidNum.replace(player, 0, bid);
+            }
+            playerTurn++;
+            return true;
+        }
+    }
+
+    public boolean playCard(int player, String card)
+    {
+        if (player == playerTurn && playerHand.containsKey(card))
+        {
+            playerHand.remove(card);
+            cardsPlayed.add(card);
+            playerTurn++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 }
