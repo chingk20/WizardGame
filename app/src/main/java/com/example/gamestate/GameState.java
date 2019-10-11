@@ -161,6 +161,10 @@ public class GameState {
                 playerArray.add(player1Hand);
                 playerArray.add(player2Hand);
                 playerArray.add(player3Hand);
+                bidNum.put("User",0);
+                bidNum.put("Player2",0);
+                bidNum.put("Player3",0);
+
         }
     }
 
@@ -198,15 +202,6 @@ public class GameState {
         playerArray = myState.playerArray;
     }
 
-    @Override
-    public String toString(){
-        return "Player turn: " + this.playerTurn + "\n Bid: " +
-        "\n Card Played: " + this.cardPlayed + "\n Player Score: " + this.playerScore +
-        "\n Game Stage: " + this.gameStage + "\n Trump Card: " + this.trumpCard +
-        "\n Round Number: " + this.roundNum + "\n Current Deck: " + this.deck +
-                "\n Player's Hand: " + this.playerArray;
-    }
-
 
     public boolean placeBid(int playerNum, int bid, String player)
     {
@@ -218,7 +213,7 @@ public class GameState {
         {
             if(bidNum.containsKey(player))
             {
-                bidNum.replace(player, 0, bid);
+                bidNum.put(player, bid);
             }
             playerTurn++;
             return true;
@@ -239,6 +234,15 @@ public class GameState {
         {
             return false;
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Player turn: " + this.playerTurn + "\n Bid: " + this.bidNum +
+                "\n Card Played: " + this.cardPlayed + "\n Player Score: " + this.playerScore +
+                "\n Game Stage: " + this.gameStage + "\n Trump Card: " + this.trumpCard +
+                "\n Round Number: " + this.roundNum + "\n Current Deck: " + this.deck +
+                "\n Player's Hand: " + this.playerArray;
     }
 
 

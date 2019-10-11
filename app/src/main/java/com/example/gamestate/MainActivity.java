@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editText.getText().clear();
             GameState firstInstance = new GameState();
             firstInstance.playCard(1, "diamond five");
-            firstInstance.placeBid(1, 1, "1");
+            firstInstance.placeBid(1, 1, "User");
             GameState secondInstance = new GameState(firstInstance);
             secondInstance.setPlayerTurn(1);
             // Call each action method here when they are made, using the firstInstance to call them
