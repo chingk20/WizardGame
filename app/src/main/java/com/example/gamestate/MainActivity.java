@@ -1,3 +1,12 @@
+/*
+    Main Activity Module
+
+    @Author: Keisha Ching
+    @Author: Taylor Fukumoto
+    @Author: Austin Gabriel-Garces
+    @Author: Kori Hansen
+ */
+
 package com.example.gamestate;
 
 import androidx.appcompat.app.AppCompatActivity;

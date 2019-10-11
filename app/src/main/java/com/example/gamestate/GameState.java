@@ -1,3 +1,12 @@
+/*
+    This module initializes the games state and processes actions that a player can make in the game.
+
+    @Author: Keisha Ching
+    @Author: Taylor Fukumoto
+    @Author: Austin Gabriel-Garces
+    @Author: Kori Hansen
+ */
+
 package com.example.gamestate;
 
 import java.util.ArrayList;
